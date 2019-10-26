@@ -24,14 +24,20 @@ class App extends Component {
     })
   }
 
-  changeNameHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: event.target.value, age: 23 },
-        {name: "Kellys", age: 22 },
-        {name: "Kevin", age: 23 }
-      ]
+  changeNameHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     })
+    
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons]
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons })
   }
 
   togglePersonsHandler = () => {
@@ -70,6 +76,7 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}//Se agrega este ID porque React necesita reconocer elementos únicos para solo renderizar los elementos necesarios y no todos.
+                changed={(event) => this.changeNameHandler(event, person.id)}
               />
             })
           }
