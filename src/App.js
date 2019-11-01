@@ -28,15 +28,19 @@ class App extends Component {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     })
-    
+    //Se copia la persona segun el indice
     const person = {
       ...this.state.persons[personIndex]
     }
+    //Se cambia el nombre con el escrito en el input
     person.name = event.target.value;
 
+    //Se copia el state
     const persons = [...this.state.persons]
+    //Se reemplaza la persona del indice con el nuevo valor
     persons[personIndex] = person;
 
+    //Se actualiza el state con la nueva persona
     this.setState({ persons: persons })
   }
 
@@ -58,7 +62,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: "white",
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
@@ -82,16 +87,28 @@ class App extends Component {
           }
         </div>
       );
+
+      style.backgroundColor = "red";
+    }
+
+    const classes = [];
+    if(this.state.persons.length <= 2) {
+      classes.push("red");
+    }
+    if(this.state.persons.length <= 1){
+      classes.push("bold");
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a React App! :D</h1>
-
+        <p className={classes.join(" ")}>This is really working!</p>
         <button 
         style={style} 
         onClick={this.togglePersonsHandler} >Toggle Persons</button>
+
         <br/><br/>
+
         <button 
         style={style} 
         onClick={this.switchNameHandler.bind(this, "Jojoto Con Queso!!!")} >Actualizar los nombres</button>
