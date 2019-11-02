@@ -4,9 +4,14 @@ import Radium from 'radium';
 
 const Person = (props) => {
     let {click, name, age, changed} = props;
+    const mediaStyles = {
+        "@media (min-width: 500px)": {
+            width: "450px"
+        }
+    }
 
     return(
-        <div className="Person">
+        <div className="Person" style={mediaStyles}>
             <p onClick={click}>Hola, me llamo {name} y tengo {age} años de edad :)</p>
             <input type="text" onChange={changed} value={name} />
         </div>
