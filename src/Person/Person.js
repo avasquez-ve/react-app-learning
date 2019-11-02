@@ -1,17 +1,12 @@
 import React from 'react';
-import './Person.css'
+import classes from './Person.css'
 // import Radium from 'radium';
 
 const Person = (props) => {
     let {click, name, age, changed} = props;
-    const mediaStyles = {
-        "@media (min-width: 500px)": {
-            width: "450px"
-        }
-    }
 
     return(
-        <div className="Person" style={mediaStyles}>
+        <div className={classes.Person}>
             <p onClick={click}>Hola, me llamo {name} y tengo {age} años de edad :)</p>
             <input type="text" onChange={changed} value={name} />
         </div>
